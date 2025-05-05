@@ -5,7 +5,8 @@ const { exec } = require('child_process');
 const app = express();
 const PORT = 3000;
 app.use(express.static('public'));
-
+const cors = require("cors");
+app.use(cors());
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const path = require('path');
