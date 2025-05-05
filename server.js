@@ -7,6 +7,25 @@ const PORT = 3000;
 app.use(express.static('public'));
 
 const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
+const path = require('path');
+
+// Define folder paths
+const uploadsDir = path.join(__dirname, 'uploads');
+const convertedDir = path.join(__dirname, 'converted');
+
+// Create 'uploads' folder if it doesn't exist
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+    console.log('Created uploads/ folder');
+}
+
+// Create 'converted' folder if it doesn't exist
+if (!fs.existsSync(convertedDir)) {
+    fs.mkdirSync(convertedDir);
+    console.log('Created converted/ folder');
+}
+
 
 app.post('/convert', upload.single('wordFile'), (req, res) => {
   const inputPath = path.join(__dirname, req.file.path);
